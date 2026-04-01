@@ -1,0 +1,15 @@
+services:
+  lasso:
+    image: ghcr.io/stockyard-dev/stockyard-lasso:latest
+    ports:
+      - "8890:8890"
+    environment:
+      - PORT=${STOCKYARD_PORT:-8890}
+      - DATA_DIR=${STOCKYARD_DATA_DIR:-/data}
+      - LASSO_LICENSE_KEY=${STOCKYARD_LASSO_LICENSE_KEY:-}
+    volumes:
+      - lasso-data:/data
+    restart: unless-stopped
+volumes:
+  lasso-data:
+    driver: local
